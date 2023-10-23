@@ -12,6 +12,14 @@ app.get('/', function(req, res) {
   res.sendFile(absolutePath);
 });
 
+// Baris ini  adalah metode pada objek respons yang digunakan untuk mengirim respons JSON ke klien. Dalam hal ini, responsnya adalah objek dengan properti ‘message’ yang nilainya adalah ‘Hello json’.
+app.get('/json', function(req, res){
+  res.json({
+    'message': 'Hello json'
+  });
+});
+
+
 
 
 
