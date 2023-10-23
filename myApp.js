@@ -20,6 +20,12 @@ app.get('/json', function(req, res){
 });
 
 
+// setting and accessing .env files 
+app.get('/json', function(req, res) {
+  let message = "Hello json";
+  (process.env.MESSAGE_STYLE == "uppercase") ? message = message.toUpperCase() : message = message; res.json({ "message": message });
+});
+
 
 
 
