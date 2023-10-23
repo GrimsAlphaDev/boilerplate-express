@@ -26,6 +26,29 @@ app.get('/json', function(req, res) {
   (process.env.MESSAGE_STYLE == "uppercase") ? message = message.toUpperCase() : message = message; res.json({ "message": message });
 });
 
+// chain middleware
+// Ini mendefinisikan rute GET ke jalur ‘/now’. Ketika server menerima permintaan GET ke jalur ‘/now’, fungsi callback yang diberikan akan dipanggil secara berurutan.
+// function (req,res, next) Ini adalah fungsi middleware pertama yang dipanggil ketika server menerima permintaan GET ke jalur ‘/now’. Fungsi ini menerima tiga argumen: req (objek permintaan), res (objek respons), dan next (fungsi callback berikutnya dalam stack middleware). Dalam fungsi ini, Anda menambahkan properti time ke objek permintaan dengan nilai waktu saat ini, dan kemudian memanggil fungsi next() untuk melanjutkan ke fungsi middleware berikutnya.
+app.get('/now', function(req,res,next){
+
+  req.time = new Date().toString();
+  next();
+
+  // function(req,res){...}: Ini adalah fungsi middleware kedua (dan terakhir) yang dipanggil. Fungsi ini mengambil objek permintaan dan respons sebagai argumen. Dalam fungsi ini, Anda mengirimkan respons JSON ke klien dengan properti ‘time’ yang nilainya diambil dari properti ‘time’ objek permintaan
+}, function(req,res){
+  res.json({time: req.time});
+
+});
+
+// /:word/echo. :word adalah parameter rute yang dapat diubah.
+app.get('/:word/echo', function(req,res) {
+  // Dalam fungsi callback, req.params.word digunakan untuk mengambil nilai parameter :word dari URL.
+  // res.json({echo: req.params.word}); mengirim respons dalam format JSON ke client. Respons tersebut berisi objek dengan properti echo yang nilainya diambil dari parameter :word.
+  res.json({echo: req.params.word});
+
+});
+
+
 
 
 
