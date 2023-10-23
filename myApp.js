@@ -49,6 +49,13 @@ app.get('/:word/echo', function(req,res) {
 });
 
 
+app.get('/name', function(req,res) {
+  // console.log(req.query.firstname);
+  // Dalam fungsi callback, req.query.first dan req.query.last digunakan untuk mengambil nilai query parameter first dan last dari URL.
+  res.json({
+    "name" : req.query.first + " " + req.query.last
+  });
+});
 
 
 
